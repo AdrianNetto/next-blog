@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "next-themes";
 import ThemeCom from "@/components/ThemeCom";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,17 +22,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider>
-          <ThemeCom>
-            <Header />
-            {children}
-          </ThemeCom>
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <ThemeProvider>
+            <ThemeCom>
+              <Header />
+              {children}
+            </ThemeCom>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
