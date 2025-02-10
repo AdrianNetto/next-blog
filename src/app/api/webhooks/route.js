@@ -46,5 +46,26 @@ export async function POST(req) {
   console.log(`Received webhook with ID ${id} and event type of ${eventType}`);
   console.log("Webhook payload:", body);
 
+  if (eventType === "user.created") {
+    const { id, email_addresses, first_name, last_name } = evt.data;
+    console.log(`User created: ${id}`);
+    console.log(`Email addresses: ${email_addresses}`);
+    console.log(`First name: ${first_name}`);
+    console.log(`Last name: ${last_name}`);
+  }
+
+  if (eventType === "user.updated") {
+    const { id, email_addresses, first_name, last_name } = evt.data;
+    console.log(`User updated: ${id}`);
+    console.log(`Email addresses: ${email_addresses}`);
+    console.log(`First name: ${first_name}`);
+    console.log(`Last name: ${last_name}`);
+  }
+
+  if (eventType === "user.deleted") {
+    const { id } = evt.data;
+    console.log(`User deleted: ${id}`);
+  }
+
   return new Response("Webhook received", { status: 200 });
 }
